@@ -1,0 +1,31 @@
+---
+hello_world:
+  module: hello
+  class: HelloWorld
+
+basement_ventilators:
+  module: humidity
+  class: HumidityTrigger
+  monitor: sensor.outside_absolutehumidity
+  entities:
+    - switch: switch.sonoff_10012a3187
+      sensor: sensor.kaelder_opbevaring_spisestue_absolutehumidity
+    - switch: switch.sonoff_10012a3240
+      sensor: sensor.kaelder_under_koekken_absolutehumidity
+    - switch: switch.sonoff_10012a48c2
+      sensor: sensor.kaelder_varme_absolutehumidity
+    - switch: switch.sonoff_10012a4921
+      sensor: sensor.systue_absolutehumidity
+    - switch: switch.sonoff_1001031571
+      sensor: sensor.vaerksted_absolutehumidity
+    - switch: switch.sonoff_10012e9a92_2
+      sensor: sensor.bryggers_absolutehumidity
+
+luminance:
+  module: luminance_light
+  class: Light
+  sensor: sensor.xiaomi_lumi_sen_ill_mgl01_a12f0a00_illuminance
+
+transition:
+  module: transition
+  class: Transition
