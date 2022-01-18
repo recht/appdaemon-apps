@@ -2,15 +2,15 @@ haptek:
   module: light
   class: Haptek
   device: ws_1
-  button1: light.toilet
-  button2: light.toilet
+  button1: light.toilet_zha_group_0x0003
+  button2: light.toilet_zha_group_0x0003
 
 kontor:
   module: light
   class: Haptek
   device: ws_2
-  button1: light.kontor
-  button2: light.kontor
+  button1: light.kontor_zha_group_0x0004
+  button2: light.kontor_zha_group_0x0004
 
 hoveddør:
   module: light
@@ -25,8 +25,8 @@ badeværelse:
   module: light
   class: Haptek
   device: ws_13
-  button1: light.badevaerelse_spejl
-  button2: light.badevaerelse_bad
+  button1: light.badevaerelse_spejl_zha_group_0x0007
+  button2: light.badevaerelse_zha_group_0x0008
   has_led: true
 
 køkken_top:
@@ -51,7 +51,7 @@ stue:
   module: light
   class: Haptek
   device: ws_5
-  button1: light.legostue
+  button1: light.legostue_lampe_level_on_off
   button2: light.stue
   button3: switch.ikea_of_sweden_tradfri_control_outlet_5eb4cefe_on_off
 
@@ -59,23 +59,24 @@ børneværelse_gade:
   module: light
   class: Haptek
   device: ws_6
-  button1: light.bornevaerelse_gade
-  button2: light.bornevaerelse_gade
+  button1: light.signify_netherlands_b_v_lwo001_level_on_off
+  button2: light.signify_netherlands_b_v_lwo001_level_on_off
   button3: switch.ledvance_switch_1
 
 børneværelse_have:
   module: light
   class: Haptek
   device: ws_7
-  button1: light.bornevaerelse_have
-  button2: light.bornevaerelse_have
+  button1: light.bornevaerelse_have_zha_group_0x0006
+  button2: light.bornevaerelse_have_zha_group_0x0006
+  button4: switch.ikea_of_sweden_tradfri_control_outlet_563f1bfe_on_off
 
 walkin:
   module: light
   class: Haptek
   device: ws_8
-  button1: light.walk_in
-  button2: light.walk_in
+  button1: light.walk_in_zha_group_0x0005
+  button2: light.walk_in_zha_group_0x0005
 
 soveværelse:
   module: light
@@ -90,7 +91,7 @@ trapperum:
   class: Haptek
   device: ws_9
   button1: light.trapperum_vaeglamper
-  button2: light.trapperum
+  button2: light.trapperum_zha_group_0x0009
   button4: light.gang_vaeglamper
 
 bryggers:
@@ -113,8 +114,8 @@ legostue:
     module: light
     class: Haptek
     device: ws_19
-    button1: light.legostue
-    button2: light.legostue
+    button1: light.legostue_lampe_level_on_off
+    button2: light.legostue_lampe_level_on_off
     button3: switch.ikea_of_sweden_tradfri_control_outlet_5eb4cefe_on_off
 
 kælder_toilet:

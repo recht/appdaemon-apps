@@ -16,8 +16,13 @@ class Transition(hass.Hass):
 
         zha = [i[1] for i in identifiers if i[0] == 'zha']
         if zha:
-            self.call_service('zha/issue_zigbee_cluster_command', ieee=zha[0], endpoint_id=11, cluster_id=8,
-                              cluster_type='in', command=3, command_type='server')
+            if 'zha_group' in light:
+                group = int(light.split('_')[-1], 0)
+                self.call_service('zha/issue_zigbee_group_command', group=group, cluster_id=8,
+                                  cluster_type='in', command=3)
+            else:
+                self.call_service('zha/issue_zigbee_cluster_command', ieee=zha[0], endpoint_id=11, cluster_id=8,
+                                  cluster_type='in', command=3, command_type='server')
         else:
             self.turn_on(light, brightness_step=0, transition=0)
 

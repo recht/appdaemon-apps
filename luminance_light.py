@@ -21,7 +21,7 @@ class Light(hass.Hass):
             return
 
         remove = []
-        for light, brightness in self.managed:
+        for light, brightness in self.managed.items():
             if self.get_state(light) == 'off':
                 remove.append(light)
                 continue

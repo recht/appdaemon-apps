@@ -187,7 +187,7 @@ class SwitchButton:
         self.state = None
         self.button = 'binary_sensor.%s_button_%d' % (dev_prefix, num)
         hass.listen_state(self.on_click, self.button)
-        hass.listen_state(self.on_state, self.switch, immediate=True)
+        #hass.listen_state(self.on_state, self.switch, immediate=True)
 
     def on_click(self, entity, attribute, old, new, kwargs):
         self.hass.log('switch click')

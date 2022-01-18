@@ -10,16 +10,22 @@ basement_ventilators:
   entities:
     - switch: switch.sonoff_10012a3187
       sensor: sensor.kaelder_opbevaring_spisestue_absolutehumidity
+      humidity: sensor.sonoff_10012a3187_humidity
     - switch: switch.sonoff_10012a3240
       sensor: sensor.kaelder_under_koekken_absolutehumidity
+      humidity: sensor.sonoff_10012a3240_humidity
     - switch: switch.sonoff_10012a48c2
       sensor: sensor.kaelder_varme_absolutehumidity
+      humidity: sensor.sonoff_10012a48c2_humidity
     - switch: switch.sonoff_10012a4921
       sensor: sensor.systue_absolutehumidity
+      humidity: sensor.sonoff_10012a4921_humidity
     - switch: switch.sonoff_1001031571
       sensor: sensor.vaerksted_absolutehumidity
+      humidity: sensor.sonoff_1001031571_humidity
     - switch: switch.sonoff_10012e9a92_2
       sensor: sensor.bryggers_absolutehumidity
+      humidity: sensor.tuyatec_prhs1rsd_rh3052_c61037fe_humidity
 
 luminance:
   module: luminance_light
@@ -29,3 +35,14 @@ luminance:
 transition:
   module: transition
   class: Transition
+
+zbbridge:
+  module: zbbridge
+  class: ZBBridge
+  ip: '192.168.1.76'
+
+term_stue:
+  module: external
+  class: ExternalTemp
+  ieee: cc:cc:cc:ff:fe:cd:38:a9
+  sensor: sensor.temp_humidity_sensor_6_temperature

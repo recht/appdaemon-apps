@@ -11,6 +11,7 @@ class HumidityTrigger(hass.Hass):
         for e in self.entities:
             self.listen_state(self.on_switch_state, e['switch'], immediate=True, sensor=e['sensor'])
             self.listen_state(self.on_entity_state, e['sensor'], immediate=True)
+            self.listen_state(self.on_humidity_state, e['humidity'], immediate=True, sensor=e['sensor'])
 
         self.listen_state(self.on_humidity, self.monitor_entity, immediate=True)
 
@@ -29,6 +30,9 @@ class HumidityTrigger(hass.Hass):
     def on_switch_state(self, entity, attribute, old, new, kwargs):
         self.sensor_states[kwargs['sensor']]['switch_state'] = new
 
+    def on_humidity_state(self, entity, attribute, old, new, kwargs):
+        self.sensor_states[kwargs['sensor']]['humidity'] = float(new) if new != 'unavailable' else 100.0
+
     def adjust(self):
         if self.outside == -1:
             return
@@ -41,13 +45,17 @@ class HumidityTrigger(hass.Hass):
         sensor_state = self.sensor_states[sensor]['state']
         switch = self.sensor_states[sensor]['switch']
         switch_state = self.sensor_states[sensor]['switch_state']
-        if sensor_state > self.outside:
+        humidity = self.sensor_states[sensor]['humidity']
+        if sensor_state > self.outside and humidity >= 45:
             if switch_state == 'on':
                 return
-            self.log('Outside humidity %s is smaller than %s for %s, turning on', self.outside, sensor_state, switch)
+            self.log('%s: Outside humidity %s is smaller than %s for %s, relative %s, turning on',
+                     sensor, self.outside, sensor_state, switch, humidity)
             self.turn_on(switch)
-        else:
+        elif sensor_state <= self.outside or humidity <= 41:
             if switch_state == 'off':
                 return
-            self.log('Outside humidity %s is larger than %s for %s, turning off', self.outside, sensor_state, switch)
+            self.log('%s: Outside humidity %s is larger than %s for %s, relative %s, turning off',
+                     sensor, self.outside, sensor_state, switch, humidity)
             self.turn_off(switch)
+
