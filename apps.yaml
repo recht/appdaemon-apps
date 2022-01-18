@@ -46,3 +46,63 @@ term_stue:
   class: ExternalTemp
   ieee: cc:cc:cc:ff:fe:cd:38:a9
   sensor: sensor.temp_humidity_sensor_6_temperature
+
+term_spisestue_gade:
+  module: external
+  class: ExternalTemp
+  ieee: 84:2e:14:ff:fe:59:7f:90
+  sensor: sensor.temp_humidity_sensor_3_temperature
+
+term_spisestue_indk:
+  module: external
+  class: ExternalTemp
+  ieee: 84:2e:14:ff:fe:59:7e:f7
+  sensor: sensor.temp_humidity_sensor_3_temperature
+
+hvac:
+  module: hvac
+  class: HVAC
+  addresses:
+    climate.danfoss_termostat_stue_thermostat: cc:cc:cc:ff:fe:cd:38:a9
+    climate.danfoss_spisestue_gade_thermostat: 84:2e:14:ff:fe:59:7f:90
+    climate.danfoss_spisestue_indkorsel_thermostat: 84:2e:14:ff:fe:59:7e:f7
+  modes:
+    home:
+      temp: 22.5
+      key: home
+    home_unused:
+      temp: 21.5
+      key: home
+    home_basement:
+      temp: 19
+      key: home
+    away:
+      temp: 19
+      key: night
+    away_basement:
+      temp: 18
+      key: night
+    pause:
+      temp: 6
+      key: pause
+  schedules:
+    - entities:
+        - climate.danfoss_termostat_stue_thermostat
+      schedule:
+        - '00:00:00': away
+        - '06:20:00': home
+        - '23:00:00': away
+    - entities:
+      - climate.danfoss_spisestue_gade_thermostat
+      - climate.danfoss_spisestue_indkorsel_thermostat
+      schedule:
+        - '00:00:00': away
+        - '07:30:00': home
+        - '22:30:00': away
+    - entities: []
+      schedule:
+        - '00:00:00': away
+        - '06:30:00': home_unused
+        - '08:00:00': away
+        - '16:00:00': home_unused
+        - '22:30:00': away
